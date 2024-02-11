@@ -1,7 +1,8 @@
 import { Task } from "../interfaces/task.interface";
 import { useDeleteTask } from "../hooks/task.mutations";
 import avatar from "../assets/avatar.svg";
-import ModalSvg from "../assets/ModalSvg";
+import deleteSvg from "../assets/delete.svg";
+import editSvg from "../assets/edit.svg";
 import formatDate from "../utils/DateFormat";
 
 interface TaskCardProps {
@@ -14,7 +15,6 @@ const Card = ({ task }: TaskCardProps) => {
   const handleDeleteTask = async () => {
     try {
       await deleteTaskMutation.mutateAsync(task.id);
-      console.log("Tarea eliminada correctamente");
     } catch (error) {
       console.error("Error al eliminar la tarea:", error);
     }
@@ -25,10 +25,17 @@ const Card = ({ task }: TaskCardProps) => {
       <div className="relative h-[9rem] flex flex-col items-start p-4 mt-3 bg-white rounded-lg bg-opacity-90 group hover:bg-opacity-100">
         <button
           className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 mt-3 mr-2 text-gray-500 rounded hover:bg-gray-200 hover:text-gray-700 group-hover:flex "
-          aria-label="Acciones"
+          aria-label="Eliminar tarea"
           onClick={handleDeleteTask}
         >
-          <ModalSvg />
+          <img src={deleteSvg} alt="delete.svg" />
+        </button>
+        <button
+          className="absolute top-0 right-6 flex items-center justify-center w-5 h-5 mt-3 mr-2 text-gray-500 rounded hover:bg-gray-200 hover:text-gray-700 group-hover:flex "
+          aria-label="Editar tarea"
+          onClick={handleDeleteTask}
+        >
+          <img src={editSvg} alt="edit.svg" />
         </button>
         <span
           className={`flex items-center h-6 px-3 text-xs font-semibold rounded-full ${
@@ -81,6 +88,7 @@ const Card = ({ task }: TaskCardProps) => {
             </span>
           </div>
           <img
+            loading="lazy"
             className="w-6 h-6 ml-auto rounded-full"
             src={avatar}
             alt="avatar.png"
