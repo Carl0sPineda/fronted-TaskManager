@@ -27,7 +27,7 @@ const AddTask = () => {
       await addTaskMutation.mutateAsync(data);
       reset();
       setShowModal(false);
-      toast.success("Tarea agregada con éxito!");
+      toast.success(`Tarea agregada con estado ${data.statusTask}!`);
     } catch (error) {
       toast.error("Ha ocurrido un error!");
     }
