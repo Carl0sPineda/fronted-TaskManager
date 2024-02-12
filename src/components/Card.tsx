@@ -1,24 +1,17 @@
 import { Task } from "../interfaces/task.interface";
-import { useDeleteTask } from "../hooks/task.mutations";
+import { useState } from "react";
 import avatar from "../assets/avatar.svg";
 import deleteSvg from "../assets/delete.svg";
 import editSvg from "../assets/edit.svg";
 import formatDate from "../utils/DateFormat";
+import DeleteConfirmationModal from "./DeleteConfirmModal";
 
 interface TaskCardProps {
   task: Task;
 }
 
 const Card = ({ task }: TaskCardProps) => {
-  const deleteTaskMutation = useDeleteTask();
-
-  const handleDeleteTask = async () => {
-    try {
-      await deleteTaskMutation.mutateAsync(task.id);
-    } catch (error) {
-      console.error("Error al eliminar la tarea:", error);
-    }
-  };
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 
   return (
     <div className="flex flex-col pb-2 overflow-auto">
@@ -26,14 +19,19 @@ const Card = ({ task }: TaskCardProps) => {
         <button
           className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 mt-3 mr-2 text-gray-500 rounded hover:bg-gray-200 hover:text-gray-700 group-hover:flex "
           aria-label="Eliminar tarea"
-          onClick={handleDeleteTask}
+          onClick={() => setShowDeleteModal(true)}
         >
           <img src={deleteSvg} alt="delete.svg" />
         </button>
+        {showDeleteModal && (
+          <DeleteConfirmationModal
+            taskId={task.id}
+            onClose={() => setShowDeleteModal(false)}
+          />
+        )}
         <button
           className="absolute top-0 right-6 flex items-center justify-center w-5 h-5 mt-3 mr-2 text-gray-500 rounded hover:bg-gray-200 hover:text-gray-700 group-hover:flex "
           aria-label="Editar tarea"
-          onClick={handleDeleteTask}
         >
           <img src={editSvg} alt="edit.svg" />
         </button>
