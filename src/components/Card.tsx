@@ -5,6 +5,7 @@ import deleteSvg from "../assets/delete.svg";
 import editSvg from "../assets/edit.svg";
 import formatDate from "../utils/DateFormat";
 import DeleteConfirmationModal from "./DeleteConfirmModal";
+import EditTask from "./EdiTask";
 
 interface TaskCardProps {
   task: Task;
@@ -12,6 +13,7 @@ interface TaskCardProps {
 
 const Card = ({ task }: TaskCardProps) => {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+  const [showEditModal, setShowEditModal] = useState<boolean>(false);
 
   return (
     <div className="flex flex-col pb-2 overflow-auto">
@@ -32,9 +34,13 @@ const Card = ({ task }: TaskCardProps) => {
         <button
           className="absolute top-0 right-6 flex items-center justify-center w-5 h-5 mt-3 mr-2 text-gray-500 rounded hover:bg-gray-200 hover:text-gray-700 group-hover:flex "
           aria-label="Editar tarea"
+          onClick={() => setShowEditModal(true)}
         >
           <img src={editSvg} alt="edit.svg" />
         </button>
+        {showEditModal && (
+          <EditTask task={task} onEditSuccess={() => setShowEditModal(false)} />
+        )}
         <span
           className={`flex items-center h-6 px-3 text-xs font-semibold rounded-full ${
             task.statusTask === "completado"
@@ -48,7 +54,6 @@ const Card = ({ task }: TaskCardProps) => {
         >
           {task.statusTask}
         </span>
-
         <h4 className="mt-3 text-sm font-medium">{task.description}</h4>
         <div className="flex items-center w-full mt-3 text-xs font-medium text-gray-400">
           <div className="flex items-center">
