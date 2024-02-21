@@ -35,9 +35,6 @@ const Home = ({ searchTerm }: HomeProps) => {
         <div className="flex flex-col flex-shrink-0 w-72">
           <div className="flex items-center flex-shrink-0 h-10 px-2">
             <span className="block text-sm font-semibold">Pendiente</span>
-            <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
-              {taskInProgress?.length}
-            </span>
           </div>
           {taskInProgress?.map((task) => (
             <Card key={task.id} task={task} />
@@ -46,9 +43,6 @@ const Home = ({ searchTerm }: HomeProps) => {
         <div className="flex flex-col flex-shrink-0 w-72">
           <div className="flex items-center flex-shrink-0 h-10 px-2">
             <span className="block text-sm font-semibold">En proceso</span>
-            <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
-              {taskInProgress?.length}
-            </span>
           </div>
           {taskInProgress?.map((task) => (
             <Card key={task.id} task={task} />
@@ -57,9 +51,6 @@ const Home = ({ searchTerm }: HomeProps) => {
         <div className="flex flex-col flex-shrink-0 w-72">
           <div className="flex items-center flex-shrink-0 h-10 px-2">
             <span className="block text-sm font-semibold">Completado</span>
-            <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
-              {filteredCompleted?.length}
-            </span>
           </div>
           {filteredCompleted?.map((task) => (
             <Card key={task.id} task={task} />
@@ -68,9 +59,6 @@ const Home = ({ searchTerm }: HomeProps) => {
         <div className="flex flex-col flex-shrink-0 w-72">
           <div className="flex items-center flex-shrink-0 h-10 px-2">
             <span className="block text-sm font-semibold">Postergado</span>
-            <span className="flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30">
-              {filteredPosponed?.length}
-            </span>
           </div>
           {filteredPosponed?.map((task) => (
             <Card key={task.id} task={task} />
